@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function () {
   let lastScrollY = 0;
   const header = document.querySelector('header');
 
+  // Throttled scroll handling for smoother updates and to avoid accidentally clearing nav active state
+  let ticking = false;
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
 
@@ -108,6 +110,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     lastScrollY = currentScrollY;
+
+    // Throttle heavier work to animation frame
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        // update in-page section highlighting
+        onScroll();
+        // re-assert pathname-based active link for multipage sites so it doesn't disappear on scroll
+        try { setActiveNavByPath(); } catch (e) {}
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 
   // Add ripple effect to buttons
@@ -168,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const href = a.getAttribute('href') || '';
       // Keep hash-only links out of pathname matching
       if (href.startsWith('#')) {
-        a.classList.remove('active');
+        // don't touch hash-only links here
         return;
       }
       try {

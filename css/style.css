@@ -35,7 +35,8 @@ body {
     line-height: 1.6;
     color: var(--text);
     background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
-    background-attachment: fixed;
+    /* remove fixed attachment to reduce paint cost and improve perceived loading speed */
+    background-attachment: scroll;
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -109,6 +110,21 @@ nav.primary a {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* Ensure active link stays visible regardless of header scrolled state */
+header.scrolled nav.primary a {
+    color: var(--text);
+}
+
+header.scrolled nav.primary a.active {
+    /* keep the same visible active styles when header gets the scrolled background */
+    background: var(--gradient) !important;
+    color: var(--white) !important;
+    transform: translateY(-2px);
+    z-index: 1100; /* sit above header layers */
+    box-shadow: 0 8px 24px rgba(102,126,234,0.18);
+}
+
+/* make sure the pseudo background is visible on top of header's blur */
 nav.primary a::before {
     content: '';
     position: absolute;
@@ -121,19 +137,13 @@ nav.primary a::before {
     z-index: -1;
 }
 
-nav.primary a:hover::before {
-    left: 0;
-}
-
 nav.primary a.active::before {
     left: 0;
     background: var(--gradient);
 }
 
-nav.primary a:hover {
-    color: var(--text);
-    transform: translateY(-1px);
-    background: rgba(102, 126, 234, 0.1);
+nav.primary a:hover::before {
+    left: 0;
 }
 
 nav.primary a.active {
@@ -164,6 +174,14 @@ nav.primary a.active {
     color: var(--primary);
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
+}
+
+/* Ensure social SVG icons always render at a consistent size */
+.social-icons svg,
+.social-icons a svg {
+    width: 18px;
+    height: 18px;
+    display: block;
 }
 
 .social-icons a:hover {
@@ -200,7 +218,8 @@ main {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: fadeInUp 1s ease-out;
+    /* shorten animation for faster perceived load */
+    animation: fadeInUp 0.45s ease-out;
 }
 
 @keyframes fadeInUp {
@@ -219,7 +238,8 @@ main {
     font-weight: 600;
     color: var(--primary);
     margin-bottom: 1.5rem;
-    animation: fadeInUp 1s ease-out 0.2s both;
+    /* faster reveal and smaller delay */
+    animation: fadeInUp 0.35s ease-out 0.05s both;
 }
 
 .hero .description {
@@ -228,7 +248,8 @@ main {
     max-width: 600px;
     margin: 0 auto 2rem;
     line-height: 1.8;
-    animation: fadeInUp 1s ease-out 0.4s both;
+    /* faster reveal */
+    animation: fadeInUp 0.35s ease-out 0.08s both;
 }
 
 /* Updated buttons - lighter colors with better hover effects */
@@ -237,7 +258,8 @@ main {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    animation: fadeInUp 1s ease-out 0.6s both;
+    /* faster reveal for CTAs */
+    animation: fadeInUp 0.4s ease-out 0.1s both;
 }
 
 .btn {
@@ -463,6 +485,9 @@ h2::after {
     box-shadow: var(--shadow-hover);
     border-color: transparent;
 }
+
+/* Small utility classes */
+.accent-text { color: var(--accent); }
 
 /* Skill bars and interactive elements */
 .skill-item {
@@ -839,4 +864,20 @@ h2::after {
     .project-features li {
         font-size: 0.95rem;
     }
+}
+
+/* Lightweight visuals for the About page to improve perceived load speed */
+.about-page header {
+    /* slightly reduce blur and opacity so the header paints faster */
+    backdrop-filter: blur(6px);
+    background: rgba(15, 15, 26, 0.92);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.about-page .hero {
+    /* reduce heavy effects and vertical padding for faster initial paint */
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 3rem 0;
+    margin: 1.5rem auto;
 }
