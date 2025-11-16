@@ -12,132 +12,144 @@
 </head>
 <body>
 
-<header>
-    <div class="container header-inner">
-        <div class="brand">Md Abdullah Arman</div>
-        <nav class="primary">
-            <a href="index.html">About</a>
-            <a href="education.html">Education</a>
-            <a href="projects.html">Projects</a>
-            <a href="skills.html" class="active">Skills</a>
-            <a href="activities.html">Activities</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <div class="social-icons">
-            <a href="https://www.linkedin.com/in/abdullah-arman-71880632a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5C4.98 4.6 4.09 5.5 2.99 5.5C1.89 5.5 1 4.6 1 3.5C1 2.4 1.89 1.5 2.99 1.5C4.09 1.5 4.98 2.4 4.98 3.5ZM1.5 8.5H4.5V22H1.5V8.5ZM8.5 8.5H11.2V10.2H11.3C11.8 9.2 13.1 8 15.3 8C19.2 8 20 10.6 20 14.2V22H17V15.2C17 13.6 16.9 11.6 14.4 11.6C11.9 11.6 11.6 13.8 11.6 15.1V22H8.5V8.5Z" fill="currentColor"/></svg>
-            </a>
-            <a href="https://github.com/Arman-1532" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 .5C5.7.5.8 5.4.8 11.7c0 4.7 3.1 8.7 7.4 10.1.5.1.7-.2.7-.5v-1.9c-3 0-3.6-1.4-3.8-2.7-.1-.3-.6-1.2-1-1.5-.3-.2-.8-.7 0-.7.7 0 1.2.6 1.4.8.8 1.3 2 1 2.6.8.1-.6.3-1 .6-1.3-2.7-.3-5.6-1.3-5.6-6 0-1.3.4-2.3 1.1-3.2-.1-.3-.5-1.6.1-3.3 0 0 .9-.3 3 .8.9-.2 1.9-.3 2.9-.3s2 .1 2.9.3c2.2-1.2 3-.8 3-.8.6 1.7.2 3 .1 3.3.7.9 1.1 1.9 1.1 3.2 0 4.7-2.9 5.7-5.6 6 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5 4.3-1.4 7.4-5.4 7.4-10.1C23.2 5.4 18.3.5 12 .5z" fill="currentColor"/></svg>
-            </a>
-            <a href="mailto:bsse1532@iit.du.ac.bd" aria-label="Email">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
-            </a>
-        </div>
+<!-- Mobile Menu Toggle Button -->
+<button class="mobile-menu-toggle" onclick="toggleSidebar()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+</button>
+
+<!-- Sidebar Overlay for mobile -->
+<div class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<!-- Vertical Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+    <div class="brand">Md Abdullah Arman</div>
+
+    <nav class="primary">
+        <a href="index.html">About</a>
+        <a href="education.html">Education</a>
+        <a href="projects.html">Projects</a>
+        <a href="skills.html" class="active">Skills</a>
+        <a href="activities.html">Activities</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="social-icons">
+        <a href="https://www.linkedin.com/in/abdullah-arman-71880632a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.98 3.5C4.98 4.6 4.09 5.5 2.99 5.5C1.89 5.5 1 4.6 1 3.5C1 2.4 1.89 1.5 2.99 1.5C4.09 1.5 4.98 2.4 4.98 3.5ZM1.5 8.5H4.5V22H1.5V8.5ZM8.5 8.5H11.2V10.2H11.3C11.8 9.2 13.1 8 15.3 8C19.2 8 20 10.6 20 14.2V22H17V15.2C17 13.6 16.9 11.6 14.4 11.6C11.9 11.6 11.6 13.8 11.6 15.1V22H8.5V8.5Z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://github.com/Arman-1532" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 .5C5.7.5.8 5.4.8 11.7c0 4.7 3.1 8.7 7.4 10.1.5.1.7-.2.7-.5v-1.9c-3 0-3.6-1.4-3.8-2.7-.1-.3-.6-1.2-1-1.5-.3-.2-.8-.7 0-.7.7 0 1.2.6 1.4.8.8 1.3 2 1 2.6.8.1-.6.3-1 .6-1.3-2.7-.3-5.6-1.3-5.6-6 0-1.3.4-2.3 1.1-3.2-.1-.3-.5-1.6.1-3.3 0 0 .9-.3 3 .8.9-.2 1.9-.3 2.9-.3s2 .1 2.9.3c2.2-1.2 3-.8 3-.8.6 1.7.2 3 .1 3.3.7.9 1.1 1.9 1.1 3.2 0 4.7-2.9 5.7-5.6 6 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5 4.3-1.4 7.4-5.4 7.4-10.1C23.2 5.4 18.3.5 12 .5z" fill="currentColor"/></svg>
+        </a>
+        <a href="mailto:bsse1532@iit.du.ac.bd" aria-label="Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg>
+        </a>
     </div>
-</header>
+</aside>
 
-<main class="container section">
-    <section id="skills">
-      <h2>Skills</h2>
+<main style="margin-left: 280px; padding-top: 0; margin-top: 0;">
+    <div class="container section">
+        <section id="skills">
+          <h2>Skills</h2>
 
 
-      <div class="skills-container" style="margin-top:24px;">
+          <div class="skills-container" style="margin-top:24px;">
 
-        <div class="skills-category">
+            <div class="skills-category">
 
-          <h3 class="skills-category-title">Programming Languages</h3>
+              <h3 class="skills-category-title">Programming Languages</h3>
 
-          <ul class="skills-list">
+              <ul class="skills-list">
 
-            <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="skill-icon"><span>Java</span></li>
+                <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="skill-icon"><span>Java</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" class="skill-icon"><span>Python</span></li>
+                <li><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" class="skill-icon"><span>Python</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/cplusplus/00599C" alt="C++" class="skill-icon"><span>C++</span></li>
+                <li><img src="https://cdn.simpleicons.org/cplusplus/00599C" alt="C++" class="skill-icon"><span>C++</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/php/777BB4" alt="PHP" class="skill-icon"><span>PHP</span></li>
+                <li><img src="https://cdn.simpleicons.org/php/777BB4" alt="PHP" class="skill-icon"><span>PHP</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/c/A8B9CC" alt="C" class="skill-icon"><span>C</span></li>
+                <li><img src="https://cdn.simpleicons.org/c/A8B9CC" alt="C" class="skill-icon"><span>C</span></li>
 
-          </ul>
+              </ul>
 
-        </div>
+            </div>
 
-        <div class="skills-category">
+            <div class="skills-category">
 
-          <h3 class="skills-category-title">Web Technologies</h3>
+              <h3 class="skills-category-title">Web Technologies</h3>
 
-          <ul class="skills-list">
+              <ul class="skills-list">
 
-            <li><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML" class="skill-icon"><span>HTML</span></li>
+                <li><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML" class="skill-icon"><span>HTML</span></li>
 
-            <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" class="skill-icon"><span>CSS</span></li>
+                <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" class="skill-icon"><span>CSS</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="Javascript" class="skill-icon"><span>Javascript</span></li>
+                <li><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="Javascript" class="skill-icon"><span>Javascript</span></li>
 
-          </ul>
+              </ul>
 
-        </div>
+            </div>
 
-        <div class="skills-category">
+            <div class="skills-category">
 
-          <h3 class="skills-category-title">Libraries and Frameworks</h3>
+              <h3 class="skills-category-title">Libraries and Frameworks</h3>
 
-          <ul class="skills-list">
+              <ul class="skills-list">
 
-            <li><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas" class="skill-icon"><span>Pandas</span></li>
+                <li><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas" class="skill-icon"><span>Pandas</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/numpy/013243" alt="NumPy" class="skill-icon"><span>NumPy</span></li>
+                <li><img src="https://cdn.simpleicons.org/numpy/013243" alt="NumPy" class="skill-icon"><span>NumPy</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" class="skill-icon"><span>React</span></li>
+                <li><img src="https://cdn.simpleicons.org/react/61DAFB" alt="React" class="skill-icon"><span>React</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" class="skill-icon"><span>Node.js</span></li>
+                <li><img src="https://cdn.simpleicons.org/nodedotjs/339933" alt="Node.js" class="skill-icon"><span>Node.js</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/bootstrap/7952B3" alt="Bootstrap CSS" class="skill-icon"><span>Bootstrap CSS</span></li>
+                <li><img src="https://cdn.simpleicons.org/bootstrap/7952B3" alt="Bootstrap CSS" class="skill-icon"><span>Bootstrap CSS</span></li>
 
-          </ul>
+              </ul>
 
-        </div>
+            </div>
 
-        <div class="skills-category">
+            <div class="skills-category">
 
-          <h3 class="skills-category-title">Databases</h3>
+              <h3 class="skills-category-title">Databases</h3>
 
-          <ul class="skills-list">
+              <ul class="skills-list">
 
-            <li><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" class="skill-icon"><span>MySQL</span></li>
+                <li><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" class="skill-icon"><span>MySQL</span></li>
 
-            <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" alt="OracleDB" class="skill-icon"><span>OracleDB</span></li>
+                <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" alt="OracleDB" class="skill-icon"><span>OracleDB</span></li>
 
-          </ul>
+              </ul>
 
-        </div>
+            </div>
 
-        <div class="skills-category">
+            <div class="skills-category">
 
-          <h3 class="skills-category-title">Development Tools</h3>
+              <h3 class="skills-category-title">Development Tools</h3>
 
-          <ul class="skills-list">
+              <ul class="skills-list">
 
-            <li><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" class="skill-icon"><span>Git</span></li>
+                <li><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" class="skill-icon"><span>Git</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/github/181717" alt="Github" class="skill-icon"><span>Github</span></li>
+                <li><img src="https://cdn.simpleicons.org/github/181717" alt="Github" class="skill-icon"><span>Github</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/linux/FCC624" alt="Linux" class="skill-icon"><span>Linux</span></li>
+                <li><img src="https://cdn.simpleicons.org/linux/FCC624" alt="Linux" class="skill-icon"><span>Linux</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/jupyter/F37626" alt="Jupyter Notebook" class="skill-icon"><span>Jupyter Notebook</span></li>
+                <li><img src="https://cdn.simpleicons.org/jupyter/F37626" alt="Jupyter Notebook" class="skill-icon"><span>Jupyter Notebook</span></li>
 
-            <li><img src="https://cdn.simpleicons.org/postman/FF6C37" alt="Postman" class="skill-icon"><span>Postman</span></li>
+                <li><img src="https://cdn.simpleicons.org/postman/FF6C37" alt="Postman" class="skill-icon"><span>Postman</span></li>
 
-          </ul>
+              </ul>
 
-        </div>
+            </div>
 
-      </div>
+          </div>
 
-    </section>
-
+        </section>
+    </div>
 </main>
 
 <footer>

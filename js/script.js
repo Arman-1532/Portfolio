@@ -1,7 +1,38 @@
 // Enhanced Portfolio JavaScript with Animations and Interactions
 
-// Initialize everything when DOM is loaded
+// Sidebar functionality
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('active');
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+
+  sidebar.classList.remove('open');
+  overlay.classList.remove('active');
+}
+
+// Close sidebar when clicking on nav links (mobile)
 document.addEventListener('DOMContentLoaded', function () {
+  const navLinks = document.querySelectorAll('.sidebar nav.primary a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth <= 768) {
+        closeSidebar();
+      }
+    });
+  });
+
+  // Ensure all navigation links are visible in the sidebar
+  navLinks.forEach(link => {
+    link.style.display = 'block'; // Ensure all links are displayed
+  });
+
   // Initialize animations
   initAnimations();
 
