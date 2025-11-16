@@ -147,7 +147,6 @@ nav.primary a:hover::before {
 }
 
 nav.primary a.active {
-    color: white;
     transform: translateY(-2px);
     /* Ensure the active link has an explicit visible background and sits above header layers */
     background: var(--gradient);
@@ -156,7 +155,6 @@ nav.primary a.active {
     box-shadow: 0 6px 18px rgba(102,126,234,0.15);
 }
 
-/* Social icons */
 .social-icons {
     display: flex;
     gap: 1rem;
@@ -880,4 +878,25 @@ h2::after {
     border: 1px solid rgba(255,255,255,0.06);
     padding: 3rem 0;
     margin: 1.5rem auto;
+}
+
+/* Responsive fix: allow horizontal scrolling of header nav on narrow screens so all links remain reachable on mobile */
+@media (max-width: 900px) {
+    nav.primary {
+        /* Keep links on one line and allow horizontal scroll if they overflow viewport */
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+        scrollbar-width: none; /* hide Firefox scrollbar */
+        -ms-overflow-style: none; /* hide IE/Edge scrollbar */
+    }
+
+    /* Make each link not shrink so they remain clickable/padded */
+    nav.primary a {
+        flex: 0 0 auto;
+        white-space: nowrap; /* avoid internal wrapping of link text */
+    }
+
+    /* Hide native webkit scrollbar for a cleaner appearance */
+    nav.primary::-webkit-scrollbar { display: none; }
 }
