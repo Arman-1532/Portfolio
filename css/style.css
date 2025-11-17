@@ -39,6 +39,8 @@ body {
     background-attachment: scroll;
     min-height: 100vh;
     overflow-x: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Container */
@@ -46,6 +48,26 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure images don't overflow */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* SVGs used as icons should maintain their size */
+.sidebar svg,
+.btn svg,
+.social-link svg,
+.project-link svg,
+.skill-icon,
+.skill-logo svg,
+.email-icon {
+    max-width: none;
+    height: auto;
 }
 
 /* Vertical Sidebar Navigation */
@@ -206,6 +228,7 @@ main {
 
     .sidebar {
         transform: translateX(-100%); /* Ensure sidebar is hidden by default */
+        padding-top: 5rem; /* Add top padding to accommodate menu button */
     }
 
     .sidebar.open {
@@ -215,6 +238,7 @@ main {
     main {
         margin-left: 0; /* Remove left margin for main content */
         padding: 1rem; /* Adjust padding for smaller screens */
+        margin-top: 0; /* Remove top margin on mobile */
     }
 
     .container {
@@ -258,6 +282,12 @@ main {
         transition: all 0.3s ease;
     }
 
+    /* Ensure menu button stays above sidebar when open */
+    .sidebar.open ~ .mobile-menu-toggle,
+    .mobile-menu-toggle {
+        z-index: 1002; /* Always above sidebar (z-index 1000) */
+    }
+
     .mobile-menu-toggle:hover {
         transform: scale(1.1);
         box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
@@ -281,6 +311,287 @@ main {
         opacity: 1;
         visibility: visible;
     }
+
+    /* Hero section mobile responsiveness */
+    .hero {
+        padding: 3rem 1rem;
+        margin: 1rem auto;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .hero .subtitle {
+        font-size: 1rem;
+    }
+
+    .hero .description {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
+    }
+
+    /* Typography mobile adjustments */
+    h2 {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+    }
+
+    h2::after {
+        width: 40px;
+        height: 3px;
+    }
+
+    /* Buttons mobile responsiveness */
+    .cta-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: stretch;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Cards mobile adjustments */
+    .card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Project cards mobile */
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .project-header h3 {
+        font-size: 1.25rem;
+    }
+
+    .project-links {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .project-link {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    .project-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .project-features h4,
+    .project-tech h4 {
+        font-size: 1rem;
+    }
+
+    .project-features li {
+        font-size: 0.9rem;
+        padding: 0.4rem 0;
+    }
+
+    /* Skills mobile responsiveness */
+    .skills-container {
+        gap: 1.5rem;
+    }
+
+    .skills-category {
+        padding: 1.5rem;
+    }
+
+    .skills-category-title {
+        font-size: 1.25rem;
+    }
+
+    .skills-list {
+        gap: 0.75rem;
+    }
+
+    .skills-list li {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .skill-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Stats section mobile */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    /* Contact page mobile */
+    .contact-simple .card {
+        padding: 1.5rem;
+    }
+
+    .contact-card {
+        max-width: 100% !important;
+    }
+
+    .contact-email {
+        margin: 1.5rem 0;
+    }
+
+    .email-text {
+        font-size: 0.95rem;
+        word-break: break-word;
+        text-align: center;
+    }
+
+    .social-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .social-links-wrapper {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .contact-social {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
+}
+
+/* Small mobile devices (up to 480px) */
+@media (max-width: 480px) {
+    main {
+        padding: 0.75rem;
+    }
+
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .hero {
+        padding: 2rem 0.75rem;
+        margin: 0.75rem auto;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .hero .description {
+        font-size: 0.9rem;
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+
+    .btn {
+        padding: 0.65rem 1.25rem;
+        font-size: 0.85rem;
+    }
+
+    .project-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .project-description {
+        font-size: 0.9rem;
+    }
+
+    .skills-category {
+        padding: 1.25rem;
+    }
+
+    .skills-list li {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .mobile-menu-toggle {
+        width: 45px;
+        height: 45px;
+        top: 0.75rem;
+        left: 0.75rem;
+    }
+
+    .sidebar {
+        padding-top: 4.5rem; /* Slightly less padding on very small screens */
+    }
+
+    .sidebar .brand {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+        margin-top: 0; /* Remove any top margin */
+    }
+
+    nav.primary a {
+        padding: 0.85rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* Section spacing mobile */
+    .section {
+        padding: 2rem 0;
+    }
+
+    .email-text {
+        font-size: 0.95rem;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        text-align: center;
+    }
+
+    .social-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .social-links-wrapper {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .contact-social {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
 }
 
 @media (min-width: 769px) {
@@ -297,6 +608,13 @@ main {
 main {
     margin-top: 80px;
     min-height: calc(100vh - 160px);
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-top: 0;
+        min-height: auto;
+    }
 }
 
 /* Hero section with dark theme */
@@ -529,6 +847,48 @@ h2::after {
     padding: 2rem 0;
 }
 
+.contact-card {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-email {
+    margin: 2rem 0;
+}
+
+.email-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.email-icon {
+    flex-shrink: 0;
+}
+
+.contact-btn {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.contact-social {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-links-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
 .social-link {
     display: inline-flex;
     align-items: center;
@@ -590,6 +950,13 @@ h2::after {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .skill-category .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
 }
 
 .skill-category .skill-item {
@@ -762,26 +1129,6 @@ h2::after {
     text-align: center;
 }
 
-/* Responsive design for skills */
-@media (max-width: 768px) {
-    .skills-list {
-        gap: 0.75rem;
-    }
-
-    .skills-list li {
-        padding: 0.6rem 1rem;
-        font-size: 0.95rem;
-    }
-
-    .skill-icon {
-        width: 20px;
-        height: 20px;
-    }
-
-    .skills-category-title {
-        font-size: 1.3rem;
-    }
-}
 
 /* End of stylesheet */
 
@@ -892,6 +1239,12 @@ h2::after {
     gap: 0.5rem;
 }
 
+@media (max-width: 480px) {
+    .tech-stack {
+        gap: 0.4rem;
+    }
+}
+
 .tech-tag {
     display: inline-block;
     padding: 0.4rem 0.8rem;
@@ -933,21 +1286,6 @@ h2::after {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive design for projects */
-@media (max-width: 768px) {
-    .project-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .tech-stack {
-        justify-content: flex-start;
-    }
-
-    .project-features li {
-        font-size: 0.95rem;
-    }
-}
 
 /* Lightweight visuals for the About page to improve perceived load speed */
 .about-page header {
