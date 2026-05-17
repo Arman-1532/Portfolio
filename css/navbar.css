@@ -1,0 +1,335 @@
+/* ============================================================
+   Top Navigation Bar
+   ============================================================ */
+:root {
+    --nav-height: 68px;
+}
+
+/* Scroll offset so sections aren't hidden behind the fixed navbar */
+html {
+    scroll-padding-top: var(--nav-height);
+}
+
+body.single-page {
+    padding-top: var(--nav-height);
+}
+
+/* ── Navbar shell ─────────────────────────────────────────── */
+.site-nav {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    z-index: 1000;
+    background: rgba(10, 10, 18, 0.85);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Scrolled state — slightly more opaque */
+.site-nav.scrolled {
+    background: rgba(10, 10, 18, 0.97);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Inner layout (horizontal flex row) ─────────────────── */
+.site-nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 100%;
+    padding: 0 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ── Brand / Logo ─────────────────────────────────────────── */
+.site-nav__brand {
+    font-size: 1.15rem;
+    font-weight: 800;
+    text-decoration: none;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: -0.3px;
+    transition: opacity 0.2s ease;
+}
+
+.site-nav__brand:hover {
+    opacity: 0.85;
+}
+
+/* ── Nav links (horizontal row) ─────────────────────────── */
+.site-nav__menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.site-nav__menu .nav-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+    letter-spacing: 0.2px;
+}
+
+/* Animated underline — only for hover, not active */
+.site-nav__menu .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 60%;
+    height: 2px;
+    background: var(--gradient);
+    border-radius: 2px;
+    transition: transform 0.22s ease;
+    transform-origin: center;
+}
+
+/* ── Hover: lightweight tint + underline, no filled pill ─── */
+.site-nav__menu .nav-link:hover {
+    color: var(--primary);
+    background: rgba(102, 126, 234, 0.07);
+}
+
+.site-nav__menu .nav-link:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* ── Active: solid gradient pill + glow — "you are here" ─── */
+.site-nav__menu .nav-link.active {
+    color: var(--white);
+    background: var(--gradient);
+    box-shadow: 0 2px 14px rgba(102, 126, 234, 0.45);
+    font-weight: 700;
+}
+
+/* Active link uses the pill itself as indicator — no underline */
+.site-nav__menu .nav-link.active::after {
+    display: none;
+}
+
+/* Hovering the already-active link: keep pill, just intensify glow */
+.site-nav__menu .nav-link.active:hover {
+    color: var(--white);
+    background: var(--gradient);
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.65);
+}
+
+/* ── Social icons ─────────────────────────────────────────── */
+.site-nav__social {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.site-nav__social a {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--primary);
+    transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    border: 1px solid rgba(102, 126, 234, 0.15);
+}
+
+.site-nav__social a:hover {
+    background: var(--gradient);
+    color: white;
+    transform: translateY(-2px);
+    border-color: transparent;
+    box-shadow: 0 6px 18px rgba(102, 126, 234, 0.4);
+}
+
+/* ── Mobile hamburger toggle ─────────────────────────────── */
+.mobile-menu-toggle {
+    display: none;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    color: var(--text);
+    padding: 0.5rem;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(102, 126, 234, 0.2);
+}
+
+.mobile-menu-toggle[aria-expanded="true"] {
+    background: var(--gradient);
+    color: white;
+    border-color: transparent;
+}
+
+/* ── Overlay (mobile) ─────────────────────────────────────── */
+.site-nav__overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.site-nav__overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ── Page sections scroll margin ─────────────────────────── */
+.page-section {
+    scroll-margin-top: var(--nav-height);
+}
+
+/* ── Hero adjustments ────────────────────────────────────── */
+.page-section.hero {
+    min-height: calc(100vh - var(--nav-height));
+    padding: 4rem 0 3rem;
+    margin: 0 auto 2rem;
+    max-width: 1200px;
+    border-radius: var(--radius);
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer {
+    position: relative;
+    z-index: 1;
+    background: rgba(10, 10, 18, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 1.5rem 0;
+    margin-left: 0 !important;
+    backdrop-filter: blur(10px);
+}
+
+footer .container p {
+    text-align: center;
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 0.88rem;
+}
+
+/* ── Responsive: main & footer reset ────────────────────── */
+body.single-page main,
+body.single-page footer {
+    margin-left: 0 !important;
+}
+
+/* ============================================================
+   MOBILE  (≤ 768px) — dropdown drawer
+   ============================================================ */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: inline-flex;
+    }
+
+    .site-nav__overlay {
+        display: block;
+    }
+
+    .site-nav__menu {
+        /* Drawer: slides down from top, full-width */
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.25rem;
+        background: rgba(10, 10, 18, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 1rem;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        /* Hidden by default */
+        transform: translateY(-110%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.25s ease,
+            visibility 0.3s ease;
+        pointer-events: none;
+    }
+
+    /* Open state */
+    .site-nav.open .site-nav__menu {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .site-nav__menu .nav-link {
+        font-size: 1rem;
+        padding: 0.85rem 1rem;
+        border-radius: 10px;
+        display: block;
+        text-align: left;
+    }
+
+    .site-nav__menu .nav-link::after {
+        display: none;
+    }
+
+    .site-nav__menu .nav-link.active {
+        background: var(--gradient);
+        color: white;
+        box-shadow: 0 4px 14px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Hide social icons from nav on mobile (they're in the hero) */
+    .site-nav__social {
+        display: none;
+    }
+}
+
+/* ============================================================
+   SMALL MOBILE  (≤ 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+    .site-nav__inner {
+        padding: 0 1rem;
+    }
+
+    .site-nav__brand {
+        font-size: 1rem;
+    }
+}

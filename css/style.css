@@ -1,4 +1,8 @@
-/* Modern Portfolio Stylesheet for Arman */
+/* Portfolio — main stylesheet (imports partials) */
+@import url('components-info.css');
+@import url('navbar.css');
+
+/* === Variables === */
 :root {
     /* Dark theme color palette */
     --primary: #667eea;
@@ -14,10 +18,11 @@
     --text: #e2e8f0;
     --text-light: #94a3b8;
     --text-muted: #64748b;
+    --muted: #64748b;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.4);
     --radius: 12px;
-    --sidebar-width: 280px;
+    --nav-height: 68px;
 }
 
 /* Reset and base styles */
@@ -59,7 +64,7 @@ img {
 }
 
 /* SVGs used as icons should maintain their size */
-.sidebar svg,
+.site-nav svg,
 .btn svg,
 .social-link svg,
 .project-link svg,
@@ -70,251 +75,32 @@ img {
     height: auto;
 }
 
-/* Vertical Sidebar Navigation */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--sidebar-width);
-    height: 100vh;
-    background: rgba(15, 15, 26, 0.98);
-    backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 0;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
+/* Legacy sidebar rules removed — top navbar is now used */
 
-.sidebar .brand {
-    font-size: 1.3rem;
-    font-weight: 800;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-align: center;
-    margin-bottom: 3rem;
-    padding: 0 1.5rem;
-    transition: transform 0.3s ease;
-}
-
-.sidebar .brand:hover {
-    transform: scale(1.05);
-}
-
-/* Vertical Navigation */
-nav.primary {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0 1.5rem;
-    flex: 1;
-    overflow-y: auto; /* Allow vertical scrolling */
-    max-height: 80vh; /* Limit height to prevent overflow */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-}
-
-nav.primary a {
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius);
-    position: relative;
-    transition: all 0.3s ease;
-    text-align: left;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-nav.primary a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(102, 126, 234, 0.1);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: var(--radius);
-}
-
-nav.primary a:hover::before {
-    opacity: 1;
-}
-
-nav.primary a:hover {
-    color: var(--white);
-    transform: translateX(8px);
-}
-
-nav.primary a.active {
-    background: var(--gradient);
-    color: var(--white);
-    transform: translateX(8px);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-}
-
-nav.primary a.active::before {
-    opacity: 0;
-}
-
-/* Ensure all navigation links are visible in the sidebar */
-.sidebar nav.primary a {
-    display: block; /* Ensure all links are displayed */
-    visibility: visible; /* Ensure links are not hidden */
-    opacity: 1; /* Ensure links are fully visible */
-}
-
-/* Social Icons in Sidebar */
-.sidebar .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 0 1.5rem;
-    margin-top: 2rem;
-}
-
-.sidebar .social-icons a {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(102, 126, 234, 0.2);
-    color: var(--primary);
-    transition: all 0.3s ease;
-}
-
-.sidebar .social-icons svg {
-    width: 18px;
-    height: 18px;
-}
-
-.sidebar .social-icons a:hover {
-    background: var(--gradient);
-    color: white;
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: var(--shadow);
-}
-
-/* Hide old header */
-header {
-    display: none;
-}
-
-/* Main content with sidebar spacing */
+/* Main content — no sidebar offset needed */
 main {
-    margin-left: var(--sidebar-width);
-    min-height: 100vh;
+    margin-left: 0;
+    min-height: calc(100vh - var(--nav-height));
     padding: 2rem;
 }
 
-/* Mobile responsiveness for sidebar */
+/* ── Mobile responsiveness (≤ 768px) ─────────────────────── */
 @media (max-width: 768px) {
-    :root {
-        --sidebar-width: 240px;
-    }
-
     body {
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-    }
-
-    .sidebar {
-        transform: translateX(-100%); /* Ensure sidebar is hidden by default */
-        padding-top: 5rem; /* Add top padding to accommodate menu button */
-    }
-
-    .sidebar.open {
-        transform: translateX(0); /* Show sidebar when open */
+        overflow-x: hidden;
     }
 
     main {
-        margin-left: 0; /* Remove left margin for main content */
-        padding: 1rem; /* Adjust padding for smaller screens */
-        margin-top: 0; /* Remove top margin on mobile */
+        padding: 1rem;
     }
 
     .container {
-        padding: 0 1rem; /* Adjust container padding */
+        padding: 0 1rem;
     }
 
-    nav.primary {
-        flex-wrap: nowrap;
-        overflow-x: auto; /* Allow horizontal scrolling for navigation */
-        scrollbar-width: none; /* Hide scrollbar in Firefox */
-        -ms-overflow-style: none; /* Hide scrollbar in IE */
-    }
-
-    nav.primary::-webkit-scrollbar {
-        display: none; /* Hide scrollbar in WebKit browsers */
-    }
-
-    footer {
-        margin-left: 0; /* Ensure footer aligns properly */
-        padding: 1.5rem 0; /* Adjust padding for smaller screens */
-    }
-
-    /* Mobile menu toggle */
-    .mobile-menu-toggle {
-        position: fixed;
-        top: 1rem;
-        left: 1rem;
-        z-index: 1001;
-        background: var(--gradient);
-        color: white;
-        border: none;
-        padding: 0.75rem;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        transition: all 0.3s ease;
-    }
-
-    /* Ensure menu button stays above sidebar when open */
-    .sidebar.open ~ .mobile-menu-toggle,
-    .mobile-menu-toggle {
-        z-index: 1002; /* Always above sidebar (z-index 1000) */
-    }
-
-    .mobile-menu-toggle:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-    }
-
-    /* Overlay for mobile */
-    .sidebar-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .sidebar-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    /* Hero section mobile responsiveness */
+    /* Hero section mobile */
     .hero {
-        padding: 3rem 1rem;
+        padding: 3rem 1rem 2rem;
         margin: 1rem auto;
     }
 
@@ -332,7 +118,7 @@ main {
         padding: 0 0.5rem;
     }
 
-    /* Typography mobile adjustments */
+    /* Typography */
     h2 {
         font-size: 1.75rem;
         margin-bottom: 2rem;
@@ -343,7 +129,7 @@ main {
         height: 3px;
     }
 
-    /* Buttons mobile responsiveness */
+    /* Buttons */
     .cta-buttons {
         flex-direction: column;
         gap: 0.75rem;
@@ -357,22 +143,20 @@ main {
         justify-content: center;
     }
 
-    /* Cards mobile adjustments */
+    /* Cards */
     .card {
         padding: 1.5rem;
         margin-bottom: 1.5rem;
     }
 
-    /* Project cards mobile */
+    /* Projects */
     .project-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
     }
 
-    .project-header h3 {
-        font-size: 1.25rem;
-    }
+    .project-header h3 { font-size: 1.25rem; }
 
     .project-links {
         flex-wrap: wrap;
@@ -396,65 +180,33 @@ main {
     }
 
     .project-features h4,
-    .project-tech h4 {
-        font-size: 1rem;
-    }
+    .project-tech h4 { font-size: 1rem; }
 
     .project-features li {
         font-size: 0.9rem;
         padding: 0.4rem 0;
     }
 
-    /* Skills mobile responsiveness */
-    .skills-container {
-        gap: 1.5rem;
-    }
+    /* Skills */
+    .skills-container { gap: 1.5rem; }
+    .skills-category { padding: 1.5rem; }
+    .skills-category-title { font-size: 1.25rem; }
+    .skills-list { gap: 0.75rem; }
+    .skills-list li { padding: 0.6rem 1rem; font-size: 0.9rem; }
+    .skill-icon { width: 20px; height: 20px; }
 
-    .skills-category {
-        padding: 1.5rem;
-    }
-
-    .skills-category-title {
-        font-size: 1.25rem;
-    }
-
-    .skills-list {
-        gap: 0.75rem;
-    }
-
-    .skills-list li {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    .skill-icon {
-        width: 20px;
-        height: 20px;
-    }
-
-    /* Stats section mobile */
+    /* Stats */
     .stats-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
         padding: 1.5rem;
     }
+    .stat-number { font-size: 2rem; }
 
-    .stat-number {
-        font-size: 2rem;
-    }
-
-    /* Contact page mobile */
-    .contact-simple .card {
-        padding: 1.5rem;
-    }
-
-    .contact-card {
-        max-width: 100% !important;
-    }
-
-    .contact-email {
-        margin: 1.5rem 0;
-    }
+    /* Contact */
+    .contact-simple .card { padding: 1.5rem; }
+    .contact-card { max-width: 100% !important; }
+    .contact-email { margin: 1.5rem 0; }
 
     .email-text {
         font-size: 0.95rem;
@@ -481,92 +233,29 @@ main {
     }
 }
 
-/* Small mobile devices (up to 480px) */
+/* ── Small mobile (≤ 480px) ───────────────────────────────── */
 @media (max-width: 480px) {
-    main {
-        padding: 0.75rem;
-    }
-
-    .container {
-        padding: 0 0.75rem;
-    }
+    main { padding: 0.75rem; }
+    .container { padding: 0 0.75rem; }
 
     .hero {
         padding: 2rem 0.75rem;
         margin: 0.75rem auto;
     }
 
-    .hero h1 {
-        font-size: 1.75rem;
-    }
+    .hero h1 { font-size: 1.75rem; }
+    .hero .subtitle { font-size: 0.9rem; }
+    .hero .description { font-size: 0.9rem; padding: 0; }
 
-    .hero .subtitle {
-        font-size: 0.9rem;
-    }
+    h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+    .card { padding: 1.25rem; }
+    .btn { padding: 0.65rem 1.25rem; font-size: 0.85rem; }
+    .project-header h3 { font-size: 1.1rem; }
+    .project-description { font-size: 0.9rem; }
+    .skills-category { padding: 1.25rem; }
+    .skills-list li { padding: 0.5rem 0.75rem; font-size: 0.85rem; }
 
-    .hero .description {
-        font-size: 0.9rem;
-        padding: 0;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .card {
-        padding: 1.25rem;
-    }
-
-    .btn {
-        padding: 0.65rem 1.25rem;
-        font-size: 0.85rem;
-    }
-
-    .project-header h3 {
-        font-size: 1.1rem;
-    }
-
-    .project-description {
-        font-size: 0.9rem;
-    }
-
-    .skills-category {
-        padding: 1.25rem;
-    }
-
-    .skills-list li {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.85rem;
-    }
-
-    .mobile-menu-toggle {
-        width: 45px;
-        height: 45px;
-        top: 0.75rem;
-        left: 0.75rem;
-    }
-
-    .sidebar {
-        padding-top: 4.5rem; /* Slightly less padding on very small screens */
-    }
-
-    .sidebar .brand {
-        font-size: 1.1rem;
-        padding: 0 1rem;
-        margin-bottom: 2rem;
-        margin-top: 0; /* Remove any top margin */
-    }
-
-    nav.primary a {
-        padding: 0.85rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    /* Section spacing mobile */
-    .section {
-        padding: 2rem 0;
-    }
+    .section { padding: 2rem 0; }
 
     .email-text {
         font-size: 0.95rem;
@@ -591,29 +280,6 @@ main {
     .contact-social {
         margin-top: 1.5rem;
         padding-top: 1.5rem;
-    }
-}
-
-@media (min-width: 769px) {
-    .mobile-menu-toggle {
-        display: none;
-    }
-
-    .sidebar-overlay {
-        display: none;
-    }
-}
-
-/* Main content spacing for fixed header */
-main {
-    margin-top: 80px;
-    min-height: calc(100vh - 160px);
-}
-
-@media (max-width: 768px) {
-    main {
-        margin-top: 0;
-        min-height: auto;
     }
 }
 
@@ -1287,50 +953,27 @@ h2::after {
 }
 
 
-/* Lightweight visuals for the About page to improve perceived load speed */
-.about-page header {
-    /* slightly reduce blur and opacity so the header paints faster */
-    backdrop-filter: blur(6px);
-    background: rgba(15, 15, 26, 0.92);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+/* About page performance tweaks */
+.about-page .site-nav {
+    backdrop-filter: blur(12px);
+    background: rgba(10, 10, 18, 0.97);
 }
 
 .about-page .hero {
-    /* reduce heavy effects and vertical padding for faster initial paint */
     backdrop-filter: blur(6px);
     border: 1px solid rgba(255,255,255,0.06);
     padding: 3rem 0;
     margin: 1.5rem auto;
 }
 
-/* Responsive fix: allow horizontal scrolling of header nav on narrow screens so all links remain reachable on mobile */
-@media (max-width: 900px) {
-    nav.primary {
-        /* Keep links on one line and allow horizontal scroll if they overflow viewport */
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
-        scrollbar-width: none; /* hide Firefox scrollbar */
-        -ms-overflow-style: none; /* hide IE/Edge scrollbar */
-    }
-
-    /* Make each link not shrink so they remain clickable/padded */
-    nav.primary a {
-        flex: 0 0 auto;
-        white-space: nowrap; /* avoid internal wrapping of link text */
-    }
-
-    /* Hide native webkit scrollbar for a cleaner appearance */
-    nav.primary::-webkit-scrollbar { display: none; }
-}
-
-/* Footer positioning - ensure it's centered and not covered by sidebar */
+/* Footer — no sidebar offset */
 footer {
-    margin-left: var(--sidebar-width);
+    margin-left: 0;
     padding: 2rem 0;
-    background: rgba(15, 15, 26, 0.95);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 10, 18, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
     text-align: center;
+    backdrop-filter: blur(10px);
 }
 
 footer .container {
@@ -1339,15 +982,13 @@ footer .container {
 }
 
 footer p {
-    color: var(--text-light);
-    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.88rem;
     margin: 0;
 }
 
-/* Mobile footer positioning */
 @media (max-width: 768px) {
     footer {
-        margin-left: 0;
         padding: 1.5rem 0;
     }
 

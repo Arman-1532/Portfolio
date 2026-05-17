@@ -1,0 +1,43 @@
+/* Shared info / list cards (education, activities) */
+.info-card {
+    margin-bottom: 1.5rem;
+}
+
+.info-card__title {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.info-card__institution {
+    margin: 0.25rem 0;
+    font-weight: 600;
+}
+
+.info-card__detail,
+.info-card__period {
+    margin: 0.25rem 0;
+    color: var(--text-muted);
+}
+
+.info-card__list {
+    margin: 0.5rem 0;
+    padding-left: 1.2rem;
+}
+
+.info-card__list li {
+    margin-bottom: 0.5rem;
+}
+
+.info-card__list li:last-child {
+    margin-bottom: 0;
+}
+
+.contact-intro {
+    margin-bottom: 1.5rem;
+}
+
+.contact-social-label {
+    margin-bottom: 1rem;
+}
