@@ -13,7 +13,7 @@ const CONTENT = {
     {
       degree: 'B.Sc in Software Engineering',
       institution: 'University of Dhaka',
-      detail: 'CGPA: 3.75 (till date)',
+      detail: 'CGPA: 3.77 (till date)',
       period: '2023 - 2027 (expected)',
     },
     {
