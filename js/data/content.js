@@ -184,7 +184,7 @@ const CONTENT = {
     },
     {
       title: 'Competitive Programming',
-      items: ['Codeforces Contest Rating: 985'],
+      items: ['Codeforces Contest Rating: 1082'],
     },
   ],
 };
